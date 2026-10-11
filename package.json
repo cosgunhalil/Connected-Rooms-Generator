@@ -21,5 +21,12 @@
   },
   "dependencies": {
     "com.unity.probuilder": "5.0.0"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Generation Showcase",
+      "description": "Press Space and a level grows from its start room outwards with a blueprint and dissolve animation, cycling through every grid type. Needs URP and Shader Graph (Unity 6). CRG > Samples > Create Generation Showcase Scene sets it up.",
+      "path": "Samples~/GenerationShowcase"
+    }
+  ]
 }

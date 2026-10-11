@@ -203,6 +203,25 @@ Every generated level has a `CRGLevelData` component with the layout, stored wit
 | `GetTopology(room, cell)`, `GetCellLocalPosition(room, cell)`, `GetCellCornerLocal(room, cell, corner)`, `GetRoomAnchorLocalPosition(room)` | The grid and positions of a room's cells, in the level's local space. They work for every level, including mixed and hand-built ones where rooms or cells have their own grids. |
 | `GetDoorCenterLocal(door)`, `GetDoorForwardLocal(door)`, `GetDoorOpeningLocal(door)` | Door position, direction (RoomA → RoomB) and opening endpoints, in the level's local space. |
 
+## Samples
+
+Import them from **Window → Package Manager → Connected Rooms Generator → Samples**. When the package sits in your project's `Assets` folder instead of `Packages`, Unity doesn't list them: copy the folder from `Samples~` into `Assets` instead.
+
+**Generation Showcase** shows generation as an animation. Press Space, and a level grows from its start room outwards:
+
+1. A glowing blueprint of the grid appears.
+2. Each room's outline spreads through the doors.
+3. Each room solidifies from the door it was entered through.
+
+Every press dissolves the level and builds the next grid type: hexagon, square, triangle, octagon + square, then mixed. R builds the same level again, dragging orbits the camera and the wheel zooms.
+
+To set it up, choose **CRG → Samples → Create Generation Showcase Scene**. It creates the materials and a scene next to the sample.
+
+The sample needs the Universal Render Pipeline and Shader Graph. Its shader graphs were made with Unity 6. The effect is in each graph's Custom Function node, and the colors, edge width, noise and timing-related settings are material properties. `CRGGenerationShowcase` shows how the animation works:
+- it generates with `GenerateLevelSeparateByRoom`;
+- it orders rooms by `CRGLevelData.RoomData.DistanceFromStart`;
+- it starts each room's reveal at the door it was entered through (`GetDoorCenterLocal`).
+
 ## Scene-view overlays
 
 Every generated level draws room outlines in per-room colors, room labels (size, door count, distance from start), door markers, the connection graph routed through each door, and green/red rings on the start and end rooms. Toggle each overlay in the `CRGLevelData` Inspector, which also shows a level summary and a **Frame Level In Scene View** button. Overlays need **Gizmos** enabled in the Scene view.
